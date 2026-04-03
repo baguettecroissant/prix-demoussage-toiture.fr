@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, CheckCircle, Shield, Euro, Clock, Leaf, Droplets, Sparkles, Star, TrendingUp, Layers } from "lucide-react";
 import { getAllGuides } from "@/data/guides";
 import { getAllBrands } from "@/data/brands";
@@ -32,106 +33,118 @@ export default function HomePage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-stone-950 via-stone-900 to-blue-950 text-white">
-        {/* Decorative gradient patches */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-1/4 -left-1/4 w-3/4 h-3/4 bg-gradient-to-br from-green-900/30 to-transparent rounded-full blur-3xl" />
-          <div className="absolute -bottom-1/4 -right-1/4 w-3/4 h-3/4 bg-gradient-to-tl from-blue-900/30 to-transparent rounded-full blur-3xl" />
-          <div className="absolute top-0 left-0 w-full h-full" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.02\'%3E%3Cpath d=\'M0 0h20v20H0zM20 20h20v20H20z\'/%3E%3C/g%3E%3C/svg%3E")', backgroundSize: '40px 40px' }} />
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-stone-950 text-white pt-20 pb-16">
+        {/* Background Image & Overlays */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/home-hero.png"
+            alt="Toiture propre et rénovée après démoussage"
+            fill
+            priority
+            className="object-cover opacity-60"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-stone-950/90 via-stone-950/50 to-transparent" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 py-16 md:py-24">
-          <div className="flex flex-col md:flex-row items-center gap-10">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 w-full">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
             {/* Left: Copy */}
-            <div className="flex-1 space-y-6">
-              <div className="flex items-center gap-2">
-                <span className="bg-green-900/60 text-green-400 text-[11px] font-heading font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-green-600/30">
+            <div className="flex-1 space-y-8 max-w-2xl">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="bg-blue-600/20 text-blue-400 text-xs font-heading font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border border-blue-500/30 backdrop-blur-sm shadow-[0_0_15px_rgba(37,99,235,0.2)]">
                   Guide expert 2026
                 </span>
-                <span className="bg-blue-900/60 text-blue-400 text-[11px] font-heading font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-blue-600/30">
+                <span className="bg-white/10 text-stone-200 text-xs font-heading font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border border-white/20 backdrop-blur-sm">
                   35 000+ communes
                 </span>
               </div>
 
-              <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1]">
-                <span className="text-green-400">Démoussage</span>
-                {" "}toiture{" "}
-                <span className="bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent">
+              <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] tracking-tight">
+                <span className="text-white drop-shadow-lg">Démoussage</span>
+                <br />
+                <span className="text-stone-300">toiture</span>
+                <br />
+                <span className="bg-gradient-to-r from-blue-400 via-blue-300 to-green-400 bg-clip-text text-transparent drop-shadow-md">
                   Prix au m²
                 </span>
-                {" & "}
-                <span className="text-white">Devis Gratuits</span>
               </h1>
 
-              <p className="text-stone-300 text-lg md:text-xl max-w-xl leading-relaxed">
-                De <strong className="text-white font-mono">15€</strong> à <strong className="text-white font-mono">45€/m²</strong> — Comparez les tarifs de démoussage, nettoyage et traitement hydrofuge. Devis gratuits dans votre ville.
+              <p className="text-stone-300 text-lg md:text-xl leading-relaxed max-w-xl font-light">
+                Redonnez vie à votre toiture. Comparez les artisans locaux, découvrez les vrais tarifs (de <strong className="text-white font-mono font-medium">15€</strong> à <strong className="text-white font-mono font-medium">45€/m²</strong>) et demandez vos devis gratuits en 2 minutes.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Link href="/devis" className="btn-cta text-base px-8 py-4">
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <Link href="/devis" className="btn-cta text-base px-8 py-4 shadow-[0_0_30px_rgba(220,38,38,0.3)] hover:shadow-[0_0_40px_rgba(37,99,235,0.4)]">
                   Demander un devis gratuit
                   <ArrowRight className="h-5 w-5" />
                 </Link>
-                <Link href="/guides/prix-demoussage-toiture-2026" className="border border-stone-600 hover:border-blue-500 text-white hover:text-blue-300 font-semibold text-sm uppercase tracking-wider px-6 py-4 rounded-full text-center transition-all hover:bg-blue-950/30">
-                  Voir les prix 2026
+                <Link href="/guides/prix-demoussage-toiture-2026" className="group flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white font-semibold text-sm uppercase tracking-wider px-8 py-4 rounded-full backdrop-blur-md transition-all">
+                  Voir tarifs 2026
                 </Link>
               </div>
 
               {/* Trust badges */}
-              <div className="flex flex-wrap gap-4 pt-2 text-xs text-stone-400">
-                <span className="flex items-center gap-1.5"><CheckCircle className="h-3.5 w-3.5 text-green-500" /> 100% gratuit</span>
-                <span className="flex items-center gap-1.5"><Shield className="h-3.5 w-3.5 text-blue-500" /> Sans engagement</span>
-                <span className="flex items-center gap-1.5"><Star className="h-3.5 w-3.5 text-amber-500" /> Artisans qualifiés</span>
+              <div className="flex flex-wrap items-center gap-6 pt-6 text-sm text-stone-300 border-t border-white/10">
+                <span className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-400" /> 100% gratuit</span>
+                <span className="flex items-center gap-2"><Shield className="h-4 w-4 text-blue-400" /> Sans engagement</span>
+                <span className="flex items-center gap-2"><Star className="h-4 w-4 text-amber-400" /> Artisans qualifiés</span>
               </div>
             </div>
 
-            {/* Right: Avant/Après visual block */}
-            <div className="flex-1 max-w-md w-full">
-              <div className="relative bg-stone-800/50 backdrop-blur rounded-2xl overflow-hidden border border-stone-700">
-                {/* Before/After split */}
-                <div className="flex h-48 md:h-64">
-                  <div className="w-1/2 bg-gradient-to-br from-green-900 via-lime-900/60 to-green-950 flex flex-col items-center justify-center p-4 border-r border-stone-600/50">
-                    <Leaf className="h-10 w-10 text-green-500 mb-2" />
-                    <p className="text-green-400 font-heading font-bold text-sm uppercase tracking-wider">Avant</p>
-                    <p className="text-green-500/70 text-[11px] mt-1">Mousse &amp; lichen</p>
-                  </div>
-                  <div className="w-1/2 bg-gradient-to-br from-blue-900 via-blue-800/60 to-blue-950 flex flex-col items-center justify-center p-4">
-                    <Sparkles className="h-10 w-10 text-blue-400 mb-2" />
-                    <p className="text-blue-300 font-heading font-bold text-sm uppercase tracking-wider">Après</p>
-                    <p className="text-blue-400/70 text-[11px] mt-1">Propre &amp; protégé</p>
-                  </div>
-                </div>
+            {/* Right: Glassmorphism Info Visual */}
+            <div className="flex-1 w-full max-w-lg lg:ml-auto">
+              <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl p-1 border border-white/10 shadow-2xl">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-green-500/10 rounded-3xl" />
                 
-                {/* Badge strip */}
-                <div className="bg-stone-900/80 px-4 py-3 flex items-center justify-between">
-                  <p className="text-stone-300 text-xs">Résultat garanti par un pro</p>
-                  <span className="bg-blue-600 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
-                    Garantie 5-10 ans
-                  </span>
-                </div>
+                <div className="relative bg-stone-900/60 rounded-[22px] overflow-hidden">
+                  {/* Header */}
+                  <div className="p-5 border-b border-white/10 flex items-center justify-between">
+                    <div>
+                      <h3 className="font-heading font-bold text-white text-lg">Traitement complet</h3>
+                      <p className="text-stone-400 text-xs mt-0.5">La solution la plus durable</p>
+                    </div>
+                    <span className="bg-gradient-to-r from-blue-600 to-blue-500 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg">
+                      Garantie 10 ans
+                    </span>
+                  </div>
+                  
+                  {/* Stats Grid */}
+                  <div className="grid grid-cols-2 divide-x divide-y divide-white/5 border-b border-white/10">
+                    <div className="p-6 flex flex-col items-center justify-center text-center group hover:bg-white/5 transition-colors">
+                      <Euro className="h-6 w-6 text-green-400 mb-2 group-hover:scale-110 transition-transform" />
+                      <p className="text-white font-mono font-bold text-2xl">25-45€</p>
+                      <p className="text-stone-400 text-xs">Prix par m²</p>
+                    </div>
+                    <div className="p-6 flex flex-col items-center justify-center text-center group hover:bg-white/5 transition-colors">
+                      <Shield className="h-6 w-6 text-blue-400 mb-2 group-hover:scale-110 transition-transform" />
+                      <p className="text-white font-mono font-bold text-2xl">Hydrofuge</p>
+                      <p className="text-stone-400 text-xs">Finition protectrice</p>
+                    </div>
+                    <div className="p-6 flex flex-col items-center justify-center text-center group hover:bg-white/5 transition-colors">
+                      <Clock className="h-6 w-6 text-amber-400 mb-2 group-hover:scale-110 transition-transform" />
+                      <p className="text-white font-mono font-bold text-2xl">1 à 2</p>
+                      <p className="text-stone-400 text-xs">Jours de travaux</p>
+                    </div>
+                    <div className="p-6 flex flex-col items-center justify-center text-center group hover:bg-white/5 transition-colors">
+                      <Sparkles className="h-6 w-6 text-purple-400 mb-2 group-hover:scale-110 transition-transform" />
+                      <p className="text-white font-mono font-bold text-2xl">Neuf</p>
+                      <p className="text-stone-400 text-xs">Aspect final obtenu</p>
+                    </div>
+                  </div>
 
-                {/* Stats strip */}
-                <div className="grid grid-cols-3 divide-x divide-stone-700">
-                  <div className="p-3 text-center">
-                    <p className="text-blue-400 font-mono font-bold text-lg">15-45€</p>
-                    <p className="text-stone-500 text-[10px]">par m²</p>
-                  </div>
-                  <div className="p-3 text-center">
-                    <p className="text-green-400 font-mono font-bold text-lg">1-2j</p>
-                    <p className="text-stone-500 text-[10px]">durée travaux</p>
-                  </div>
-                  <div className="p-3 text-center">
-                    <p className="text-amber-400 font-mono font-bold text-lg">8-12</p>
-                    <p className="text-stone-500 text-[10px]">ans protection</p>
+                  {/* Footer CTA inside card */}
+                  <div className="bg-stone-950/50 p-4 text-center">
+                    <p className="text-stone-400 text-xs mb-2">Découvrez les tarifs exacts de votre toit</p>
+                    <Link href="/devis" className="inline-flex items-center justify-center w-full bg-white/10 hover:bg-white/20 text-white text-sm font-bold py-2.5 rounded-lg border border-white/5 transition-colors">
+                      Calculer mon prix
+                    </Link>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Separator moss→clean */}
-        <div className="h-1.5 bg-gradient-to-r from-green-700 via-lime-500 to-blue-600" />
       </section>
 
       {/* ── PRICING TABLE ── */}

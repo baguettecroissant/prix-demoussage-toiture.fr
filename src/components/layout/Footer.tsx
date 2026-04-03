@@ -153,19 +153,6 @@ export function Footer() {
                     </div>
                 </div>
 
-                {/* External links — cross-linking */}
-                <div className="border-t border-stone-800 pt-8 mb-8">
-                    <h4 className="text-white font-heading font-bold text-xs uppercase tracking-wider mb-3">Ressources complémentaires</h4>
-                    <div className="flex flex-wrap gap-4 text-xs">
-                        <a href="https://www.cout-toiture-prix.fr" target="_blank" rel="noopener noreferrer" className="text-stone-400 hover:text-blue-400 transition-colors">
-                            cout-toiture-prix.fr — Nettoyer et protéger votre couverture
-                        </a>
-                        <a href="https://www.prix-ravalement-facade.fr" target="_blank" rel="noopener noreferrer" className="text-stone-400 hover:text-blue-400 transition-colors">
-                            prix-ravalement-facade.fr — Nettoyage toiture + façade : le combo
-                        </a>
-                    </div>
-                </div>
-
                 {/* Bottom section — Copyright */}
                 <div className="border-t border-stone-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
                     <p className="text-xs">
