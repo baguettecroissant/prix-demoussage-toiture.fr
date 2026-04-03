@@ -15,7 +15,15 @@ export default function GuidesPage() {
 
   return (
     <>
-      {/* ── HERO ── */}
+      {/* Schema.org — BreadcrumbList */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Accueil", item: "https://www.prix-demoussage-toiture.fr" },
+          { "@type": "ListItem", position: 2, name: "Guides", item: "https://www.prix-demoussage-toiture.fr/guides" },
+        ],
+      }) }} />
       <section className="relative bg-stone-950 text-white overflow-hidden">
         {/* Background Image & Overlays */}
         <div className="absolute inset-0 z-0">

@@ -5,6 +5,7 @@ import { Leaf, Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
     { href: "/guides", label: "Guides" },
+    { href: "/marques", label: "Marques" },
     { href: "/annuaire", label: "Annuaire" },
     { href: "/faq", label: "FAQ" },
 ];

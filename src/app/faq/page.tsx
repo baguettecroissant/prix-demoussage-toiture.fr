@@ -24,6 +24,16 @@ const FAQS = [
 export default function FAQPage() {
   return (
     <>
+      {/* Schema.org — BreadcrumbList */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Accueil", item: "https://www.prix-demoussage-toiture.fr" },
+          { "@type": "ListItem", position: 2, name: "FAQ", item: "https://www.prix-demoussage-toiture.fr/faq" },
+        ],
+      }) }} />
+
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org",
         "@type": "FAQPage",

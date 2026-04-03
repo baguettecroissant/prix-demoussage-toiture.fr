@@ -5,9 +5,13 @@ import { MapPin, ArrowLeft, ArrowRight } from "lucide-react";
 import citiesData from "@/data/cities.json";
 import { type City } from "@/types";
 
-export const dynamic = "force-dynamic";
-
 const cities = citiesData as City[];
+
+// SSG — ~100 departments = perfectly viable for static generation
+export function generateStaticParams() {
+  const deptCodes = [...new Set(cities.map(c => c.department_code))];
+  return deptCodes.map(code => ({ slug: code }));
+}
 
 type Params = Promise<{ slug: string }>;
 
@@ -46,6 +50,7 @@ export default async function AnnuaireDeptPage({ params }: { params: Params }) {
 
   return (
     <>
+      {/* Schema.org — BreadcrumbList */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",

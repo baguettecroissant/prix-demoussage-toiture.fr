@@ -17,6 +17,17 @@ const BENEFITS = [
 
 export default function DevisPage() {
   return (
+    <>
+      {/* Schema.org — BreadcrumbList */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Accueil", item: "https://www.prix-demoussage-toiture.fr" },
+          { "@type": "ListItem", position: 2, name: "Devis", item: "https://www.prix-demoussage-toiture.fr/devis" },
+        ],
+      }) }} />
+
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="text-center mb-10">
         <h1 className="font-heading text-3xl md:text-4xl font-black text-stone-900">
@@ -66,5 +77,6 @@ export default function DevisPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

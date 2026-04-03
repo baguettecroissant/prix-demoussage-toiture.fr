@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, ArrowLeft, CheckCircle, Shield, Star, Layers, Package } from "lucide-react";
+import { ArrowRight, ArrowLeft, CheckCircle, Shield, Star, Layers, Package, BookOpen } from "lucide-react";
 import { getAllBrands } from "@/data/brands";
+import { getAllGuides } from "@/data/guides";
 
 export function generateStaticParams() {
   return getAllBrands().map(b => ({ slug: b.slug }));
@@ -121,6 +122,22 @@ export default async function BrandDetailPage({ params }: { params: Params }) {
             Demander un devis <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
+
+        {/* Guides associés — cross-linking */}
+        <section className="mt-10">
+          <h3 className="font-heading text-xl font-bold text-stone-900 mb-4">Guides associés</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {getAllGuides().slice(0, 4).map(g => (
+              <Link key={g.slug} href={`/guides/${g.slug}`} className="card-hover p-4 group flex items-start gap-3">
+                <BookOpen className="h-4 w-4 text-blue-600 shrink-0 mt-0.5" />
+                <div>
+                  <h4 className="font-heading font-bold text-sm text-stone-900 group-hover:text-blue-700 transition-colors">{g.title}</h4>
+                  <p className="text-[10px] text-stone-400 mt-0.5 line-clamp-1">{g.description}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
 
         {/* Other brands */}
         <div className="mt-8">

@@ -13,6 +13,17 @@ export default function MarquesPage() {
   const brands = getAllBrands();
 
   return (
+    <>
+      {/* Schema.org — BreadcrumbList */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Accueil", item: "https://www.prix-demoussage-toiture.fr" },
+          { "@type": "ListItem", position: 2, name: "Marques", item: "https://www.prix-demoussage-toiture.fr/marques" },
+        ],
+      }) }} />
+
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
         <div className="flex items-center justify-center gap-2 mb-4">
@@ -41,5 +52,6 @@ export default function MarquesPage() {
         ))}
       </div>
     </div>
+    </>
   );
 }

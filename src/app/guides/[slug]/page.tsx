@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowRight, ArrowLeft, BookOpen, Lightbulb, HelpCircle } from "lucide-react";
+import { ArrowRight, ArrowLeft, BookOpen, Lightbulb, HelpCircle, Calendar, Clock } from "lucide-react";
 import { getAllGuides } from "@/data/guides";
+import { getAllBrands } from "@/data/brands";
 
 export function generateStaticParams() {
   return getAllGuides().map(g => ({ slug: g.slug }));
@@ -40,6 +42,20 @@ export default async function GuideDetailPage({ params }: { params: Params }) {
         ],
       }) }} />
 
+      {/* Schema.org — Article */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: guide.title,
+        description: guide.description,
+        image: `https://www.prix-demoussage-toiture.fr${guide.heroImage}`,
+        datePublished: "2026-01-15",
+        dateModified: "2026-03-25",
+        author: { "@type": "Organization", name: "prix-demoussage-toiture.fr" },
+        publisher: { "@type": "Organization", name: "prix-demoussage-toiture.fr", url: "https://www.prix-demoussage-toiture.fr" },
+        mainEntityOfPage: `https://www.prix-demoussage-toiture.fr/guides/${slug}`,
+      }) }} />
+
       {/* Schema.org — FAQPage */}
       {guide.faq && guide.faq.length > 0 && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
@@ -53,28 +69,48 @@ export default async function GuideDetailPage({ params }: { params: Params }) {
         }) }} />
       )}
 
-      {/* Breadcrumb */}
-      <nav className="bg-stone-100 border-b border-stone-200 text-xs text-stone-500" aria-label="Fil d'Ariane">
-        <div className="max-w-7xl mx-auto px-4 py-2 flex flex-wrap gap-1 items-center">
-          <Link href="/" className="hover:text-blue-700">Accueil</Link>
-          <span>/</span>
-          <Link href="/guides" className="hover:text-blue-700">Guides</Link>
-          <span>/</span>
-          <span className="text-stone-900 font-semibold truncate">{guide.title}</span>
-        </div>
-      </nav>
-
-      <article className="max-w-4xl mx-auto px-4 py-12">
-        {/* Title */}
-        <div className="mb-10">
-          <div className="flex items-center gap-2 mb-4">
-            <BookOpen className="h-5 w-5 text-blue-600" />
-            <span className="text-xs uppercase tracking-widest text-stone-400 font-heading font-bold">{guide.readTime} de lecture</span>
+      {/* Hero Banner Section */}
+      <section className="relative w-full h-[50vh] min-h-[400px] flex items-end justify-center bg-stone-900 overflow-hidden">
+        <Image
+          src={guide.heroImage}
+          alt={guide.title}
+          fill
+          priority
+          className="object-cover opacity-60 mix-blend-overlay"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/60 to-transparent" />
+        
+        <div className="relative z-10 max-w-4xl w-full mx-auto px-4 pb-12">
+          {/* Breadcrumb inside hero */}
+          <nav className="mb-6 flex flex-wrap gap-2 text-xs font-semibold text-stone-300 uppercase tracking-widest" aria-label="Fil d'Ariane">
+            <Link href="/" className="hover:text-blue-400 transition-colors">Accueil</Link>
+            <span className="text-stone-600">/</span>
+            <Link href="/guides" className="hover:text-blue-400 transition-colors">Guides</Link>
+            <span className="text-stone-600">/</span>
+            <span className="text-blue-400 truncate max-w-[200px] sm:max-w-xs">{guide.title}</span>
+          </nav>
+          
+          <div className="flex items-center gap-3 mb-4">
+            <span className="bg-blue-600/20 text-blue-400 border border-blue-500/30 backdrop-blur-md px-3 py-1.5 rounded-full text-xs uppercase tracking-widest font-heading font-bold shadow-lg flex items-center gap-1.5">
+              <Clock className="h-3.5 w-3.5" />
+              {guide.readTime} de lecture
+            </span>
+            <span className="bg-stone-800/50 text-stone-300 border border-stone-700 backdrop-blur-md px-3 py-1.5 rounded-full text-xs uppercase tracking-widest font-heading font-bold flex items-center gap-1.5">
+              <Calendar className="h-3.5 w-3.5" />
+              Mis à jour: Mars 2026
+            </span>
           </div>
-          <h1 className="font-heading text-3xl md:text-4xl font-black text-stone-900 leading-tight">{guide.title}</h1>
-          <div className="energy-separator mt-4" />
-          <p className="text-stone-600 mt-4 text-lg leading-relaxed">{guide.description}</p>
+
+          <h1 className="font-heading text-4xl md:text-5xl font-black text-white leading-[1.15] drop-shadow-lg">
+            {guide.title}
+          </h1>
+          <p className="mt-4 text-lg md:text-xl text-stone-300 font-light max-w-3xl leading-relaxed">
+            {guide.description}
+          </p>
         </div>
+      </section>
+
+      <article className="max-w-4xl mx-auto px-4 py-16">
 
         {/* Table data */}
         {guide.tableData && guide.tableData.length > 0 && (
@@ -151,13 +187,30 @@ export default async function GuideDetailPage({ params }: { params: Params }) {
           </Link>
         </div>
 
+        {/* Marques recommandées — cross-linking */}
+        <div className="mt-12">
+          <h3 className="font-heading text-xl font-bold text-stone-900 mb-4">Marques & produits recommandés</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {getAllBrands().map(b => (
+              <Link key={b.slug} href={`/marques/${b.slug}`} className="card-hover p-4 group text-center">
+                <h4 className="font-heading font-bold text-sm text-stone-900 group-hover:text-blue-700 transition-colors">{b.name}</h4>
+                <p className="text-[10px] text-stone-400 mt-1">{b.gamme}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+
         {/* Other guides */}
         <div className="mt-12">
-          <h3 className="font-heading font-bold text-stone-900 mb-4">Autres guides</h3>
-          <div className="flex flex-wrap gap-2">
+          <h3 className="font-heading text-xl font-bold text-stone-900 mb-4">Guides complémentaires</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {guides.filter(g => g.slug !== slug).map(g => (
-              <Link key={g.slug} href={`/guides/${g.slug}`} className="text-xs bg-stone-100 hover:bg-blue-50 text-stone-600 hover:text-blue-700 px-3 py-1.5 rounded border border-stone-200 hover:border-blue-200 transition-colors">
-                {g.title}
+              <Link key={g.slug} href={`/guides/${g.slug}`} className="card-hover p-4 group flex items-start gap-3">
+                <BookOpen className="h-4 w-4 text-blue-600 shrink-0 mt-0.5" />
+                <div>
+                  <h4 className="font-heading font-bold text-sm text-stone-900 group-hover:text-blue-700 transition-colors">{g.title}</h4>
+                  <p className="text-[10px] text-stone-400 mt-0.5 line-clamp-1">{g.description}</p>
+                </div>
               </Link>
             ))}
           </div>

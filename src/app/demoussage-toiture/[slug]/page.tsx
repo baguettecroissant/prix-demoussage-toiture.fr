@@ -497,7 +497,7 @@ export default async function CityPage({ params }: { params: Params }) {
             {/* ── GUIDES LINKING ── */}
             <section>
               <h2 className="font-heading text-xl font-bold text-stone-900 mb-4">Nos guides pour votre projet</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                 <Link href="/guides/prix-demoussage-toiture-2026" className="card-hover p-4 group text-center">
                   <h3 className="font-heading font-bold text-sm text-stone-900 group-hover:text-blue-700 transition-colors">Prix démoussage 2026</h3>
                   <p className="text-[11px] text-stone-400 mt-1">Grille tarifaire complète</p>
@@ -509,6 +509,26 @@ export default async function CityPage({ params }: { params: Params }) {
                 <Link href="/guides/traitement-hydrofuge-toiture" className="card-hover p-4 group text-center">
                   <h3 className="font-heading font-bold text-sm text-stone-900 group-hover:text-blue-700 transition-colors">Hydrofuge toiture</h3>
                   <p className="text-[11px] text-stone-400 mt-1">Prix et efficacité</p>
+                </Link>
+                <Link href="/guides/quand-demousser-toiture" className="card-hover p-4 group text-center">
+                  <h3 className="font-heading font-bold text-sm text-stone-900 group-hover:text-blue-700 transition-colors">Quand démousser ?</h3>
+                  <p className="text-[11px] text-stone-400 mt-1">Calendrier par région</p>
+                </Link>
+                <Link href="/guides/identifier-mousse-lichen-algues" className="card-hover p-4 group text-center">
+                  <h3 className="font-heading font-bold text-sm text-stone-900 group-hover:text-blue-700 transition-colors">Mousse, lichen, algues</h3>
+                  <p className="text-[11px] text-stone-400 mt-1">Identifier le problème</p>
+                </Link>
+                <Link href="/guides/demoussage-tuiles-terre-cuite-beton-ardoise" className="card-hover p-4 group text-center">
+                  <h3 className="font-heading font-bold text-sm text-stone-900 group-hover:text-blue-700 transition-colors">Types de tuiles</h3>
+                  <p className="text-[11px] text-stone-400 mt-1">Terre cuite, béton, ardoise</p>
+                </Link>
+                <Link href="/guides/demoussage-soi-meme-vs-professionnel" className="card-hover p-4 group text-center">
+                  <h3 className="font-heading font-bold text-sm text-stone-900 group-hover:text-blue-700 transition-colors">DIY vs Professionnel</h3>
+                  <p className="text-[11px] text-stone-400 mt-1">Le vrai comparatif</p>
+                </Link>
+                <Link href="/guides/frequence-demoussage-toiture" className="card-hover p-4 group text-center">
+                  <h3 className="font-heading font-bold text-sm text-stone-900 group-hover:text-blue-700 transition-colors">Fréquence entretien</h3>
+                  <p className="text-[11px] text-stone-400 mt-1">Tous les combien ?</p>
                 </Link>
               </div>
             </section>
